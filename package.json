@@ -17,10 +17,10 @@
   "author": "Yatsenko Andrey",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.4",
-    "dotenv": "^8.2.0"
+    "nodemon": "^2.0.4"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "@hapi/joi": "^17.1.1",
     "await-to-js": "^2.1.1",
     "aws-sdk": "^2.695.0",
