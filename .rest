@@ -1,0 +1,150 @@
+// AUTH
+POST http://localhost:3000/api/auth/login
+content-type: application/json
+
+{
+    "login": "Testik2",
+    "password": "testik2"
+}
+###
+GET http://localhost:3000/api/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmMDZhM2JjNDkxYzExZDI4OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MTg4NDg3NiwiZXhwIjoxNTkxODkwODc2fQ.aIee1ax-2yenOKJz5fHbkesUTNcYSUGrRDYD9AbEH-c
+###
+POST http://localhost:3000/api/auth/refreshtoken
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmMDZhM2JjNDkxYzExZDI4OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MTg4NjcyNSwiZXhwIjoxNTkxODkyNzI1fQ.YJZCo1mDivLhsXnLB60va1eqfud4icT6QacWvD7Qsqc
+content-type: application/json
+
+{
+"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmMDZhM2JjNDkxYzExZDI4OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MTg4NjcyNSwiZXhwIjoxNTkyNDkxNTI1fQ.FsWeZyq2CjrKCNaM2MVl983aONnT59RsUVGDVHEjer8"
+}
+###
+POST http://localhost:3000/api/auth/signup
+content-type: application/json
+
+{
+    "username": "Atreychik",
+    "password": "atreychik",
+    "email": "atreychik@gmail.com",
+    "name": "Test Testovich",
+    "age": "27",
+    "role": "5ee22df32979c20cc8b5345f"
+}
+###
+POST http://localhost:3000/api/auth/forgetpassword
+content-type: application/json
+
+{
+    "email": "atreychik@gmail.com"
+}
+
+###
+POST http://localhost:3000/api/auth/resetpassword
+content-type: application/json
+
+{
+    "password": "atreychik2",
+    "resetToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0cmV5Y2hpa0BnbWFpbC5jb20iLCJpYXQiOjE1OTE5Njg3MzIsImV4cCI6MTU5MTk2OTAzMn0.rakh96pxgAgbtGkRUXtB3VghmJUcgs70892AMSQchZE"
+}
+
+
+// ROLES
+
+###
+GET http://localhost:3000/api/roles
+
+
+// USERS
+
+###
+GET http://localhost:3000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmMDZhM2JjNDkxYzExZDI4OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MTk2NjkwMywiZXhwIjoxNTkxOTY3ODAzfQ.F3G3D2kRe8wO830CgSMfozOeUyMBxjzstyAx5tqMCWM
+###
+GET http://localhost:3000/api/users/Atreychik
+###
+DELETE http://localhost:3000/api/users/5ee0c5065ceab236686f5b91
+###
+PUT http://localhost:3000/api/users/5ed7b5cbda4ad402ac341059
+content-type: application/json
+
+{
+  "role": "5ec672a77c68c422f0bf175a"
+}
+###
+PATCH  http://localhost:3000/api/users/5ee37d2ea8cfd64f74c8b91b/aprove
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmMDZhM2JjNDkxYzExZDI4OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MTk2NjkwMywiZXhwIjoxNTkxOTY3ODAzfQ.F3G3D2kRe8wO830CgSMfozOeUyMBxjzstyAx5tqMCWM
+
+
+// EXHIBITS
+
+###
+GET http://localhost:3000/api/exhibits
+###
+GET http://localhost:3000/api/exhibits/5ed768a3c7eee34140887463
+###
+POST http://localhost:3000/api/exhibits
+content-type: application/json
+
+{
+  "title": "Test exhibit of 1280 e",
+  "dated": "Test ",
+  "material": "Test ",
+  "archiveId": "Test",
+  "description": "Test { type: String, required: true }",
+  "image": "Test { type: String, required: true }"
+}
+###
+PUT http://localhost:3000/api/exhibits/5ed7732d329f2e2560301d5c
+content-type: application/json
+
+{
+  "title": "Test 3"
+}
+###
+DELETE http://localhost:3000/api/exhibits/5ed7732d329f2e2560301d5c
+
+
+// TOURS
+
+###
+GET http://localhost:3000/api/tours
+###
+GET http://localhost:3000/api/tours/usersTours
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZDdiNWNiZGE0YWQ0MDJhYzM0MTA1OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MTg3MDYwNSwiZXhwIjoxNTkxODc2NjA1fQ.B48GlYJ0dDBrlEw4-nN-qaWd-FtZGrmdXc4UgDsn7Wk
+###
+PATCH  http://localhost:3000/api/tours/5ee22f9906a3bc491c11d28a/addVisitor
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmMDZhM2JjNDkxYzExZDI4OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MTg4MjA0NywiZXhwIjoxNTkxODg4MDQ3fQ.2e9kSIfWEABZjJdWiAnUeIsUHkwn1Tnhs7heFLAlPV0
+###
+PATCH  http://localhost:3000/api/tours/5ee22f9906a3bc491c11d28a/removevisitor
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmMDZhM2JjNDkxYzExZDI4OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MTg4MjA0NywiZXhwIjoxNTkxODg4MDQ3fQ.2e9kSIfWEABZjJdWiAnUeIsUHkwn1Tnhs7heFLAlPV0
+content-type: application/json
+
+{
+  "id": "5ee22f4206a3bc491c11d288"
+}
+###
+GET http://localhost:3000/api/tours/test-3-0005
+###
+POST http://localhost:3000/api/tours
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTM3ZDJlYThjZmQ2NGY3NGM4YjkxYiIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MjIyMDgwMCwiZXhwIjoxNTkyMjI5ODAwfQ.kdIoijkWoycE_vHAo6FymuLmuRHY3_HDspCMJiiRS7s
+content-type: application/json
+
+{
+  "visitors": [],
+  "exhibits": [],
+  "theme": "Test 3",
+  "exhibitsType": "test type",
+  "duration": 23,
+  "cost": 450.34,
+  "image": "test.url",
+  "guide": "5ee37d2ea8cfd64f74c8b91b"
+}
+###
+PUT http://localhost:3000/api/tours/5ecf713601359203ec50deca
+content-type: application/json
+
+{
+  "theme": "Test 3"
+}
+###
+DELETE http://localhost:3000/api/tours/5ee7626b7b394e1448f34f6b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmMDZhM2JjNDkxYzExZDI4OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MjIyMjM5MSwiZXhwIjoxNTkyMjMxMzkxfQ.GicVhwoSIIj5vIqKeuwhXDGjGn3mG6y_DT2CxK6kWko
