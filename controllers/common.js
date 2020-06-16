@@ -61,6 +61,7 @@ const updateData = ({
   checkIsOwner = false,
   identifyBy,
   checkIsAdmin = false,
+  ignoreFields = [],
 }) => async (req, res, next) => {
   const { userId, userRole } = res.locals;
   const { id } = req.params;
@@ -71,8 +72,18 @@ const updateData = ({
   if (notIsAdmin || (notIsOwner && !checkIsAdmin))
     return res.status(403).json({ message: "You don't have a permissions!" });
 
+  const newData = Object.keys(req.body)
+    .filter((key) => !ignoreFields.includes(key))
+    .reduce(
+      (obj, currentField) => ({
+        ...obj,
+        [currentField]: req.body[currentField],
+      }),
+      {}
+    );
+
   const [error, data] = await to(
-    model.findByIdAndUpdate(id, { ...req.body }, { new: true })
+    model.findByIdAndUpdate(id, newData, { new: true })
   );
 
   if (error) return res.status(404).send();

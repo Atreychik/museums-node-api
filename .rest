@@ -79,7 +79,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmM
 ###
 GET http://localhost:3000/api/exhibits
 ###
-GET http://localhost:3000/api/exhibits/5ed768a3c7eee34140887463
+GET http://localhost:3000/api/exhibits/test-title-0001
 ###
 POST http://localhost:3000/api/exhibits
 content-type: application/json

@@ -36,6 +36,7 @@ router.put("/:id", [
     model: User,
     checkIsOwner: true,
     identifyBy: "_id",
+    ignoreFields: ["isAproved", "role", "email", "username"],
   }),
 ]);
 router.patch("/:id/aprove", [isAuthenticated, hasAccess([ADMIN]), aproveUser]);
