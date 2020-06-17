@@ -76,13 +76,12 @@ const signup = async (req, res, next) => {
 
 const refreshTokens = async (req, res, next) => {
   const { refreshToken: token } = req.body;
-  const { userId } = res.locals;
 
   const [verificationError, { id, role, isAproved }] = await verifyToken(token);
   if (verificationError) return res.status(401).send();
 
   const [error, acceptableToken] = await to(
-    RefreshToken.findOne({ user: userId, refreshTokens: { $in: [token] } })
+    RefreshToken.findOne({ user: id, refreshTokens: { $in: [token] } })
   );
   if (error)
     return next(new Error("Error at finding acceptable refresh token"));

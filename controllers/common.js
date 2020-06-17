@@ -2,7 +2,7 @@ const to = require("await-to-js").default;
 
 const { ADMIN } = require("../constant/roles");
 
-const getAllData = (model, populateWith = []) => async (req, res, next) => {
+const getAllData = ({ model, populateWith = [] }) => async (req, res, next) => {
   const path = populateWith.join(" ");
   const [error, data] = await to(model.find().populate(path));
 
@@ -26,7 +26,7 @@ const getDataByField = ({ model, field, populateWith = [] }) => async (
   res.status(200).json(data);
 };
 
-const createData = (model) => async (req, res, next) => {
+const createData = ({ model }) => async (req, res, next) => {
   const [error, data] = await to(model.create({ ...req.body }));
 
   if (error) return next(new Error(`Error at creating new ${model.modelName}`));
@@ -34,43 +34,17 @@ const createData = (model) => async (req, res, next) => {
   res.status(201).json(data);
 };
 
-const deleteDataById = ({
-  model,
-  checkIsOwner = false,
-  identifyBy,
-  checkIsAdmin = false,
-}) => async (req, res, next) => {
-  const { userId, userRole } = res.locals;
+const deleteDataById = ({ model }) => async (req, res, next) => {
   const { id } = req.params;
 
-  const notIsAdmin = checkIsAdmin && userRole != ADMIN;
-  const notIsOwner = checkIsOwner && userId != data[identifyBy];
-
-  if (notIsAdmin || (notIsOwner && !checkIsAdmin))
-    return res.status(403).json({ message: "You don't have a permissions!" });
-
-  const [error, data] = await to(model.findById(id));
+  const [error, data] = await to(model.findByIdAndRemove(id));
   if (error || !data) return res.status(404).send();
 
-  data.remove();
   res.status(200).json(data);
 };
 
-const updateData = ({
-  model,
-  checkIsOwner = false,
-  identifyBy,
-  checkIsAdmin = false,
-  ignoreFields = [],
-}) => async (req, res, next) => {
-  const { userId, userRole } = res.locals;
+const updateData = ({ model, ignoreFields = [] }) => async (req, res, next) => {
   const { id } = req.params;
-
-  const notIsAdmin = checkIsAdmin && userRole != ADMIN;
-  const notIsOwner = checkIsOwner && userId != data[identifyBy];
-
-  if (notIsAdmin || (notIsOwner && !checkIsAdmin))
-    return res.status(403).json({ message: "You don't have a permissions!" });
 
   const newData = Object.keys(req.body)
     .filter((key) => !ignoreFields.includes(key))
@@ -82,13 +56,13 @@ const updateData = ({
       {}
     );
 
-  const [error, data] = await to(
+  const [error, updatedData] = await to(
     model.findByIdAndUpdate(id, newData, { new: true })
   );
 
   if (error) return res.status(404).send();
 
-  res.status(200).json(data);
+  res.status(200).json(updatedData);
 };
 
 module.exports = {

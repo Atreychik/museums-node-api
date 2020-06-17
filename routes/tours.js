@@ -1,11 +1,17 @@
 const router = require("express").Router();
 
 const Tour = require("../models/data/tour");
+const { NewTour, UpdatedTour } = require("../models/validation/tour");
 const { ADD, REMOVE } = require("../constant/actions");
 const { VISITOR, GUIDE, ADMIN } = require("../constant/roles");
 const { validate } = require("../middleware/validationManager");
+const { parseArrays } = require("../middleware/requestManager");
 const { upload, setDataFileField } = require("../middleware/uploadManager");
-const { isAuthenticated, hasAccess } = require("../middleware/accessManager");
+const {
+  isAuthenticated,
+  hasAccess,
+  isOwner,
+} = require("../middleware/accessManager");
 const { getUsersTours, updateVisitors } = require("../controllers/tour");
 const {
   getAllData,
@@ -15,7 +21,10 @@ const {
   updateData,
 } = require("../controllers/common");
 
-router.get("/", getAllData(Tour, ["guide", "visitors", "exhibits"]));
+router.get(
+  "/",
+  getAllData({ model: Tour, populateWith: ["guide", "visitors", "exhibits"] })
+);
 router.get("/usersTours", [isAuthenticated, getUsersTours]);
 router.get(
   "/:id",
@@ -30,31 +39,25 @@ router.post("/", [
   hasAccess([GUIDE, ADMIN]),
   upload.single("image"),
   setDataFileField("image"),
-  validate("tour"),
-  createData(Tour),
+  parseArrays({ arraysFields: ["exhibits", "visitors"] }),
+  validate({ schema: NewTour }),
+  createData({ model: Tour }),
 ]);
 router.delete("/:id", [
   isAuthenticated,
   hasAccess([GUIDE, ADMIN]),
-  deleteDataById({
-    model: Tour,
-    checkIsOwner: true,
-    identifyBy: "guide",
-    checkIsAdmin: true,
-  }),
+  isOwner({ model: Tour, identifyBy: "guide" }),
+  deleteDataById({ model: Tour }),
 ]);
 router.put("/:id", [
   isAuthenticated,
   hasAccess([GUIDE, ADMIN]),
+  isOwner({ model: Tour, identifyBy: "guide" }),
   upload.single("image"),
   setDataFileField("image"),
-  validate("tour"),
-  updateData({
-    model: Tour,
-    checkIsOwner: true,
-    identifyBy: "guide",
-    checkIsAdmin: true,
-  }),
+  parseArrays({ arraysFields: ["exhibits", "visitors"] }),
+  validate({ schema: UpdatedTour }),
+  updateData({ model: Tour }),
 ]);
 router.patch("/:id/addVisitor", [
   isAuthenticated,

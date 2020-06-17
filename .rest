@@ -3,8 +3,8 @@ POST http://localhost:3000/api/auth/login
 content-type: application/json
 
 {
-    "login": "Testik2",
-    "password": "testik2"
+    "login": "ADMIN",
+    "password": "ADMIN"
 }
 ###
 GET http://localhost:3000/api/auth/logout
@@ -22,12 +22,12 @@ POST http://localhost:3000/api/auth/signup
 content-type: application/json
 
 {
-    "username": "Atreychik",
+    "username": "Admin_unapproved",
     "password": "atreychik",
-    "email": "atreychik@gmail.com",
+    "email": "admin_unapproved@test.com",
     "name": "Test Testovich",
     "age": "27",
-    "role": "5ee22df32979c20cc8b5345f"
+    "role": "5ee22df32979c20cc8b53460"
 }
 ###
 POST http://localhost:3000/api/auth/forgetpassword
@@ -57,9 +57,10 @@ GET http://localhost:3000/api/roles
 
 ###
 GET http://localhost:3000/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmMDZhM2JjNDkxYzExZDI4OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MTk2NjkwMywiZXhwIjoxNTkxOTY3ODAzfQ.F3G3D2kRe8wO830CgSMfozOeUyMBxjzstyAx5tqMCWM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTllM2NiYjRlMDFlMmIyYzkxZGZkMiIsInJvbGUiOiJWSVNJVE9SIiwiaXNBcHJvdmVkIjp0cnVlLCJpYXQiOjE1OTIzOTQzNTgsImV4cCI6MTU5MjQwMzM1OH0.KN9W8K_fmwupNDSXAzlncUTGntn_aj4OQ017tSGSC9g
 ###
-GET http://localhost:3000/api/users/Atreychik
+GET http://localhost:3000/api/users/ADMIN
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTllM2NiYjRlMDFlMmIyYzkxZGZkMiIsInJvbGUiOiJWSVNJVE9SIiwiaXNBcHJvdmVkIjp0cnVlLCJpYXQiOjE1OTIzOTQzNTgsImV4cCI6MTU5MjQwMzM1OH0.KN9W8K_fmwupNDSXAzlncUTGntn_aj4OQ017tSGSC9g
 ###
 DELETE http://localhost:3000/api/users/5ee0c5065ceab236686f5b91
 ###
@@ -70,8 +71,8 @@ content-type: application/json
   "role": "5ec672a77c68c422f0bf175a"
 }
 ###
-PATCH  http://localhost:3000/api/users/5ee37d2ea8cfd64f74c8b91b/aprove
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZjVmMDZhM2JjNDkxYzExZDI4OSIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MTk2NjkwMywiZXhwIjoxNTkxOTY3ODAzfQ.F3G3D2kRe8wO830CgSMfozOeUyMBxjzstyAx5tqMCWM
+PATCH  http://localhost:3000/api/users/5ee9e36db4e01e2b2c91dfcf/aprove
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZWM5MDZhM2JjNDkxYzExZDI4NyIsInJvbGUiOiJBRE1JTiIsImlzQXByb3ZlZCI6dHJ1ZSwiaWF0IjoxNTkyMzg2NTU4LCJleHAiOjE1OTIzOTU1NTh9.5JHqL2C0drUJsiP5QGXkAjr2Dnnd0wibsBJGdTd7dYw
 
 
 // EXHIBITS
@@ -82,6 +83,7 @@ GET http://localhost:3000/api/exhibits
 GET http://localhost:3000/api/exhibits/test-title-0001
 ###
 POST http://localhost:3000/api/exhibits
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZWM5MDZhM2JjNDkxYzExZDI4NyIsInJvbGUiOiJBRE1JTiIsImlzQXByb3ZlZCI6dHJ1ZSwiaWF0IjoxNTkyMzk3NzYwLCJleHAiOjE1OTI0MDY3NjB9.qE4MaScKkV7FGGgcr1maUWetuaciH5fr7WPMr-e79U4
 content-type: application/json
 
 {
@@ -100,7 +102,8 @@ content-type: application/json
   "title": "Test 3"
 }
 ###
-DELETE http://localhost:3000/api/exhibits/5ed7732d329f2e2560301d5c
+DELETE http://localhost:3000/api/exhibits/5ee9e783b4e01e2b2c91dfd4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTllM2I1YjRlMDFlMmIyYzkxZGZkMSIsInJvbGUiOiJWSVNJVE9SIiwiaXNBcHJvdmVkIjp0cnVlLCJpYXQiOjE1OTIzOTQ5ODgsImV4cCI6MTU5MjQwMzk4OH0.DbD2-eSmizcQ-o0omLSw7yqOh6gVymCYweF1wnSfvno
 
 
 // TOURS
@@ -125,12 +128,12 @@ content-type: application/json
 GET http://localhost:3000/api/tours/test-3-0005
 ###
 POST http://localhost:3000/api/tours
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTM3ZDJlYThjZmQ2NGY3NGM4YjkxYiIsInJvbGUiOiJHVUlERSIsImlhdCI6MTU5MjIyMDgwMCwiZXhwIjoxNTkyMjI5ODAwfQ.kdIoijkWoycE_vHAo6FymuLmuRHY3_HDspCMJiiRS7s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlZTIyZWM5MDZhM2JjNDkxYzExZDI4NyIsInJvbGUiOiJBRE1JTiIsImlzQXByb3ZlZCI6dHJ1ZSwiaWF0IjoxNTkyMzk3NzYwLCJleHAiOjE1OTI0MDY3NjB9.qE4MaScKkV7FGGgcr1maUWetuaciH5fr7WPMr-e79U4
 content-type: application/json
 
 {
   "visitors": [],
-  "exhibits": [],
+  "exhibits": ["5ee765dc0c29e505acda0285", "5ee9361a0435bf0004ece827"],
   "theme": "Test 3",
   "exhibitsType": "test type",
   "duration": 23,

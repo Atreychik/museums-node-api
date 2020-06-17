@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const Exhibit = require("../models/data/exhibit");
+const { NewExhibit, UpdatedExhibit } = require("../models/validation/exhibit");
 const { ADMIN } = require("../constant/roles");
 const { validate } = require("../middleware/validationManager");
 const { upload, setDataFileField } = require("../middleware/uploadManager");
@@ -13,15 +14,15 @@ const {
   updateData,
 } = require("../controllers/common");
 
-router.get("/", getAllData(Exhibit));
+router.get("/", getAllData({ model: Exhibit }));
 router.get("/:id", getDataByField({ model: Exhibit, field: "slug" }));
 router.post("/", [
   isAuthenticated,
   hasAccess([ADMIN]),
   upload.single("image"),
   setDataFileField("image"),
-  validate("exhibit"),
-  createData(Exhibit),
+  validate({ schema: NewExhibit }),
+  createData({ model: Exhibit }),
 ]);
 router.delete("/:id", [
   isAuthenticated,
@@ -33,7 +34,7 @@ router.put("/:id", [
   hasAccess([ADMIN]),
   upload.single("image"),
   setDataFileField("image"),
-  validate("exhibit"),
+  validate({ schema: UpdatedExhibit }),
   updateData({ model: Exhibit }),
 ]);
 

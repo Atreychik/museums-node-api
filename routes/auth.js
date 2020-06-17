@@ -8,14 +8,15 @@ const {
   forgetPassword,
   resetPassword,
 } = require("../controllers/auth");
+const { NewUser } = require("../models/validation/user");
 const { isAuthenticated } = require("../middleware/accessManager");
 const { hashPassword } = require("../middleware/passwordManager");
 const { validate } = require("../middleware/validationManager");
 
-router.post("/login", login);
 router.get("/logout", [isAuthenticated, logout]);
-router.post("/signup", [hashPassword, validate("user"), signup]);
-router.post("/refreshtoken", [isAuthenticated, refreshTokens]);
+router.post("/login", login);
+router.post("/signup", [validate({ schema: NewUser }), hashPassword, signup]);
+router.post("/refreshtoken", refreshTokens);
 router.post("/forgetpassword", forgetPassword);
 router.post("/resetpassword", [hashPassword, resetPassword]);
 
