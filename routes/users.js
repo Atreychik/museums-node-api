@@ -20,8 +20,8 @@ const { aproveUser, updateRole } = require("../controllers/user");
 
 router.get(
   "/",
-  isAuthenticated,
-  hasAccess([ADMIN]),
+  // isAuthenticated,
+  // hasAccess([ADMIN]),
   getAllData({ model: User, populateWith: ["role"] })
 );
 router.get(
