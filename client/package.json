@@ -4,8 +4,8 @@
   "description": "front-end for museums",
   "main": "index.js",
   "scripts": {
-    "start": "next build && next start",
-    "build": "npm i && next build",
+    "start": "npm i && next build && next start",
+    "build": "next build",
     "dev": "next",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
