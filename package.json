@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "REST API & Front-end for museums",
   "scripts": {
-    "start": "concurrently \"cd client && npm start\" \"cd server && npm start\""
+    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\""
   },
   "keywords": [
     "node",
