@@ -2,7 +2,7 @@
   "name": "museums-client",
   "version": "1.0.0",
   "description": "front-end for museums",
-  "main": "index.js",
+  "main": "./server/index.js",
   "keywords": [
     "node",
     "rest",
