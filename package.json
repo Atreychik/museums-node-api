@@ -1,11 +1,8 @@
 {
-  "name": "museums",
+  "name": "museums-client",
   "version": "1.0.0",
-  "description": "REST API & Front-end for museums",
-  "scripts": {
-    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
-    "dev": "concurrently \"cd server && npm run start:dev\" \"cd client && npm run dev\""
-  },
+  "description": "front-end for museums",
+  "main": "index.js",
   "keywords": [
     "node",
     "rest",
@@ -14,10 +11,32 @@
   ],
   "author": "Yatsenko Andrey",
   "license": "ISC",
-  "engines": {
-    "node": "10.15.3"
+  "scripts": {
+    "dev": "nodemon server/index.js",
+    "build": "next build ./client",
+    "start": "NODE_ENV=production node server/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   },
   "dependencies": {
-    "concurrently": "^5.2.0"
+    "@hapi/joi": "^17.1.1",
+    "await-to-js": "^2.1.1",
+    "aws-sdk": "^2.695.0",
+    "bcrypt": "^4.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.15",
+    "mongoose-slug-generator": "^1.0.4",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "nodemailer": "^6.4.8"
+  },
+  "engines": {
+    "node": "12.18.1"
   }
 }

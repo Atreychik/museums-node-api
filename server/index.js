@@ -1,10 +1,15 @@
 require("dotenv").config();
 
-const cors = require("cors");
 const slug = require("mongoose-slug-generator");
 const mongoose = require("mongoose");
 const express = require("express");
-const app = express();
+const next = require("next");
+const server = express();
+const client = next({
+  dev: process.env.NODE_ENV !== "production",
+  dir: "./client",
+});
+const clientHandler = client.getRequestHandler();
 mongoose.plugin(slug);
 
 const initDbData = require("./utils/dataManager");
@@ -15,22 +20,25 @@ const usersRouter = require("./routes/users");
 const toursRouter = require("./routes/tours");
 const rolesRouter = require("./routes/roles");
 
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 
-app.use("/api/auth", authRouter);
-app.use("/api/exhibits", exhibitsRouter);
-app.use("/api/users", usersRouter);
-app.use("/api/tours", toursRouter);
-app.use("/api/roles", rolesRouter);
+server.use("/api/auth", authRouter);
+server.use("/api/exhibits", exhibitsRouter);
+server.use("/api/users", usersRouter);
+server.use("/api/tours", toursRouter);
+server.use("/api/roles", rolesRouter);
 
-app.use((error, req, res, next) => {
+server.all("*", (req, res) => clientHandler(req, res));
+
+server.use((error, req, res, next) => {
   console.log("ERROR: ", error);
   res.status(500).json(error);
 });
 
-app.listen(process.env.PORT, async () => {
+server.listen(process.env.PORT, async () => {
+  await client.prepare();
+
   await mongoose.connect(process.env.MONGO_DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
